@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ГБУ «Городская больница Волновахского района» - Обновление данных</title>
+    <link rel="stylesheet" type="text/css" href="/css/regstyle.css">
+    <link rel="icon" type="image/x-icon" href="/imgs/favicon.ico">
+
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="/">
+                <img id="logo" src="/imgs/герб_ямала.png">
+            </a>
+            <div id="headTitle">ГБУ «Городская больница Волновахского района»</div>
+            <a href="/">
+                <img id="logo" src="/imgs/герб_ямала.png">
+            </a>
+        </header>
+        <main>
+            <div class="mainBlock">
+                <div class="info">
+                    <h2 class="title">Обновление данных</h2>
+                    <p>Заполните ниформацию:</p>
+                    <form  action="/update/<%= data.id %>" method="post">
+
+                        <div class='topForms'>
+                            <div class='topFormsA'>
+                                <input type="hidden" name="id" class="form-control" value="<%= data.id%>">
+                                <div class='block'>
+                                    <p><b id='title'>Фамилия: </b></p>
+                                    <input type="text" name="lastName" class="form-control"
+                                        value="<%= data.lastName%>">
+                                </div>
+                                <div class='block'>
+                                    <p><b id='title'>Имя: </b></p>
+                                    <input type="text" name="firstName" class="form-control"
+                                        value="<%= data.firstName %>">
+                                </div>
+
+                                <div class='block'>
+                                    <p><b id='title'>Отчество: </b></p>
+                                    <input type="text" name="patr" class="form-control"
+                                        value="<%= data.patr %>">
+                                </div>
+                            </div>
+
+                            <div class='topFormsB'>
+                                <div class='blockSex'>
+                                    <p><b id='title'>Пол: </b></p>
+                                    <div id="radio">
+                                        <label for="sexM" style="font-weight:400;">M</label>
+
+                                        <input type="radio" id="sexM" name="sex" value="Мужской" <%= data.sex === 'Мужской' ? "checked" : "" %>>
+                                        <br>
+                                    </div>
+
+                                    <div id="radio">
+                                        <label for="sexF" style="font-weight:400;">Ж</label>
+
+                                        <input type="radio" id="sexF" name="sex" value="Женский" <%= data.sex === 'Женский' ? 'checked' : '' %>>
+                                    </div>
+                                </div>
+
+                                <div class='block'>
+                                    <p><b id='title'>Дата рождения: </b></p>
+                                    <input type="date" name="birthDay" class="form-control" placeholder="дд.мм.гггг"
+                                        value="<%= data.birthDay %>">
+                                </div>
+                            </div>
+
+                            <div class='topFormsC'>
+                                <div class='block'>
+                                    <p><b id='title'>Номер телефона: </b></p>
+                                    <input type="text" name="phone" class="form-control"
+                                        value="<%= data.phone %>">
+                                </div>
+
+
+                                <div class='block'>
+                                    <p><b id='title'>Адрес: </b></p>
+                                    <input type="text" name="address" class="form-control"
+                                        placeholder="г. Москва, ул..." value="<%= data.address %>">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class='block'>
+                            <p><b id='title'>Жалобы при поступлении: </b></p>
+                            <textarea class="text" name="complaint"
+                                class="form-control"><%= data.complaint %></textarea>
+                        </div>
+
+                        <div class='block'>
+                            <p><b id='title'>История настоящего заболевания: </b></p>
+                            <textarea class="text" name="anam"
+                                class="form-control"><%= data.anam %></textarea>
+                        </div>
+
+                        <div class='block'>
+                            <p><b id='title'>Анамнез жизни: </b></p>
+                            <textarea class="text" name="life"
+                                class="form-control"><%= data.life %></textarea>
+                        </div>
+
+                        <div class='block'>
+                            <p><b id='title'>Настоящее состояние больного: </b></p>
+                            <textarea class="text" name="status"
+                                class="form-control"><%= data.status %></textarea>
+                        </div>
+
+                        <div class='block'>
+                            <p><b id='title'>Клинический диагноз: </b></p>
+                            <select name="mkb" id="mkb">
+                                <option value="<%= data.mkb %>"><%= data.mkb %></option>
+                                <option value="Другие">Другие</option>
+                                <option value=""></option>
+                                <optgroup label="Холера (A00)">
+                                    <option value="A00.0 - Холера, вызванная холерным вибрионом 01, биовар cholerae">
+                                        A00.0 - Холера, вызванная холерным вибрионом 01, биовар cholerae</option>
+                                    <option value="A00.1 - Холера, вызванная холерным вибрионом 01, биовар eltor">A00.1
+                                        - Холера, вызванная холерным вибрионом 01, биовар eltor</option>
+                                    <option value="A00.9 - Холера неуточненная">A00.9 - Холера неуточненная</option>
+                                </optgroup>
+
+                                <optgroup label="Тиф и паратиф (A01)">
+                                    <option value="A01.0 - Брюшной тиф">A01.0 - Брюшной тиф</option>
+                                    <option value="A01.1 - Паратиф A">A01.1 - Паратиф A</option>
+                                    <option value="A01.2 - Паратиф B">A01.2 - Паратиф B</option>
+                                    <option value="A01.3 - Паратиф C">A01.3 - Паратиф C</option>
+                                    <option value="A01.4 - Паратиф неуточненный">A01.4 - Паратиф неуточненный</option>
+                                </optgroup>
+
+                                <optgroup label="Паховая грыжа (K40)">
+                                    <option value="K40.0 - Двусторонняя паховая грыжа с непроходимостью без гангрены">
+                                        K40.0 - Двусторонняя паховая грыжа с непроходимостью без гангрены</option>
+                                    <option value="K40.1 - Двусторонняя паховая грыжа с гангреной">K40.1 - Двусторонняя
+                                        паховая грыжа с гангреной</option>
+                                    <option value="K40.2 - Двусторонняя паховая грыжа без непроходимости или гангрены">
+                                        K40.2 - Двусторонняя паховая грыжа без непроходимости или гангрены</option>
+                                    <option
+                                        value="K40.3 - Односторонняя или неуточненная паховая грыжа с непроходимостью без гангрены">
+                                        K40.3 - Односторонняя или неуточненная паховая грыжа с непроходимостью без
+                                        гангрены</option>
+                                    <option value="K40.4 - Односторонняя или неуточненная паховая грыжа с гангреной">
+                                        K40.4 - Односторонняя или неуточненная паховая грыжа с гангреной</option>
+                                    <option
+                                        value="K40.9 - Односторонняя или неуточненная паховая грыжа без непроходимости или гангрены">
+                                        K40.9 - Односторонняя или неуточненная паховая грыжа без непроходимости или
+                                        гангрены</option>
+                                </optgroup>
+
+                                <optgroup label="Бедренная грыжа (K41)">
+                                    <option value="K41.0 - Двусторонняя бедренная грыжа с непроходимостью без гангрены">
+                                        K41.0 - Двусторонняя бедренная грыжа с непроходимостью без гангрены</option>
+                                    <option value="K41.1 - Бедренная грыжа с гангреной">K41.1 - Бедренная грыжа с
+                                        гангреной</option>
+                                    <option value="K41.2 - Бедренная грыжа без непроходимости или гангрены">K41.2 -
+                                        Бедренная грыжа без непроходимости или гангрены</option>
+                                    <option
+                                        value="K41.3 - Односторонняя или неуточненная бедренная грыжа с непроходимостью без гангрены">
+                                        K41.3 - Односторонняя или неуточненная бедренная грыжа с непроходимостью без
+                                        гангрены</option>
+                                    <option value="K41.4 - Односторонняя или неуточненная бедренная грыжа с гангреной">
+                                        K41.4 - Односторонняя или неуточненная бедренная грыжа с гангреной</option>
+                                    <option
+                                        value="K41.9 - Односторонняя или неуточненная бедренная грыжа без непроходимости или гангрены">
+                                        K41.9 - Односторонняя или неуточненная бедренная грыжа без непроходимости или
+                                        гангрены</option>
+                                </optgroup>
+
+                                <optgroup label="Пупочная грыжа (K42)">
+                                    <option value="K42.0 - Пупочная грыжа с непроходимостью без гангрены">K42.0 -
+                                        Пупочная грыжа с непроходимостью без гангрены
+                                    </option>
+                                    <option value="K42.1 - Пупочная грыжа с гангреной">K42.1 - Пупочная грыжа с гангреной
+                                    </option>
+                                    <option value="K42.9 - Пупочная грыжа без непроходимости или гангрены">K42.9 -
+                                        Пупочная грыжа без непроходимости или гангрены
+                                    </option>
+                                </optgroup>
+
+                                <optgroup label="Грыжа передней брюшной стенки (K43)">
+                                    <option value="K43.0 - Инцизионная грыжа с непроходимостью без гангрены">K43.0 -
+                                        Инцизионная грыжа с непроходимостью без гангрены
+                                    </option>
+                                    <option value="K43.1 - Инцизионная грыжа с гангреной">K43.1 - Инцизионная грыжа с
+                                        гангреной
+                                    </option>
+                                    <option value="K43.2 - Инцизионная грыжа без непроходимости и гангрены">K43.2 -
+                                        Инцизионная грыжа без непроходимости и гангрены
+                                    </option>
+                                    <option value="K43.3 - Парастомальная грыжа с непроходимостью без гангрены">K43.3 -
+                                        Парастомальная грыжа с непроходимостью без гангрены
+                                    </option>
+                                    <option value="K43.4 - Парастомальная грыжа с гангреной">K43.4 - Парастомальная
+                                        грыжа с гангреной
+                                    </option>
+                                    <option value="K43.5 - Парастомальная грыжа без непроходимости и гангрены">K43.5 -
+                                        Парастомальная грыжа без непроходимости и гангрены
+                                    </option>
+                                    <option
+                                        value="K43.6 - Другие или неуточненные грыжы с непроходимостью без гангрены">
+                                        K43.6 - Другие или неуточненные грыжы с непроходимостью без гангрены
+                                    </option>
+                                    <option
+                                        value="K43.7 - Другие или неуточненные грыжы передней брюшной стенки с гангреной">
+                                        K43.7 - Другие или неуточненные грыжы передней брюшной стенки с гангреной
+                                    </option>
+                                    <option
+                                        value="K42.9 - Другая или неуточненная грыжа передней брюшной стенки без непроходимости или гангрены">
+                                        K43.9 - Другая или неуточненная грыжа передней брюшной стенки без непроходимости
+                                        или гангрены
+                                    </option>
+                                </optgroup>
+
+                                <optgroup label="Диафрагмальная грыжа (K44)">
+                                    <option value="K44.0 - Диафрагмальная грыжа с непроходимостью без гангрены">K44.0 -
+                                        Диафрагмальная грыжа с непроходимостью без гангрены
+                                    </option>
+                                    <option value="K44.1 - Диафрагмальная грыжа с гангреной">K44.1 - Диафрагмальная
+                                        грыжа с гангреной
+                                    </option>
+                                    <option value="K44.9 - Диафрагмальная грыжа без непроходимости или гангрены">K44.9 -
+                                        Диафрагмальная грыжа без непроходимости или гангрены
+                                    </option>
+                                </optgroup>
+
+                                <optgroup label="Другие грыжи брюшной полости (K45)">
+                                    <option value="K45.0 - Другая уточненная грыжа брюшной полости с непроходимостью без гангрены">
+                                        K45.0 - Другая уточненная грыжа брюшной полости с непроходимостью без гангрены
+                                    </option>
+                                    <option value="K45.1 - Другая уточненная грыжа брюшной полости с гангреной">K45.1 -
+                                        Другая уточненная грыжа брюшной полости с гангреной
+                                    </option>
+                                    <option value="K45.8 - Другая уточненная грыжа брюшной полости без непроходимости или гангрены">
+                                        K45.8 - Другая уточненная грыжа брюшной полости без непроходимости или гангрены
+                                    </option>
+                                </optgroup>
+
+                                <optgroup label="Грыжа брюшной полости неуточненная (K46)">
+                                    <option value="K46.0 - Неуточненная грыжа брюшной полости с непроходимостью без гангрены">
+                                        K46.0 - Неуточненная грыжа брюшной полости с непроходимостью без гангрены
+                                    </option>
+                                    <option value="K46.1 - Неуточненная грыжа брюшной полости с гангреной">
+                                        K46.1 - Неуточненная грыжа брюшной полости с гангреной
+                                    </option>
+                                    <option value="K46.9 - Неуточненная грыжа брюшной полости без непроходимости или гангрены">
+                                        K46.9 - Неуточненная грыжа брюшной полости без непроходимости или гангрены
+                                    </option>
+                                </optgroup>
+
+                                <optgroup label="Алкогольная болезнь печени (K70)">
+                                    <option value="K70.0 - Алкогольная жировая дистрофия печени [жирная печень]">
+                                        K70.0 - Алкогольная жировая дистрофия печени [жирная печень]
+                                    </option>
+                                    <option value="K70.1 - Алкогольный гепатит">
+                                        K70.1 - Алкогольный гепатит
+                                    </option>
+                                    <option value="K70.2 - Алкогольный фиброз и склероз печени">
+                                        K70.2 - Алкогольный фиброз и склероз печени
+                                    </option>
+                                    <option value="K70.3 - Алкогольный цирроз печени">
+                                        K70.3 - Алкогольный цирроз печени
+                                    </option>
+                                    <option value="K70.4 - Алкогольная печеночная недостаточность">
+                                        K70.4 - Алкогольная печеночная недостаточность
+                                    </option>
+                                    <option value="K70.9 - Алкогольная болезнь печени неуточненная">
+                                        K70.9 - Алкогольная болезнь печени неуточненная
+                                    </option>
+                                </optgroup>
+
+                            </select>
+
+                            <textarea style="height: 50px;margin-top:10px;" name="diag"
+                                class="form-control"><%= data.diag %></textarea>
+                        </div>
+
+                        <div class='block'>
+                            <p><b id='title'>Сопутствующие заболевания: </b></p>
+                            <textarea style="height: 50px;" class="text" name="sop_zab"
+                                class="form-control"><%= data.sop_zab %></textarea>
+                        </div>
+
+                        <div class='block'>
+                            <p><b id='title'>Рекомендации: </b></p>
+                            <textarea class="text" name="rec" class="form-control"><%= data.rec %></textarea>
+                        </div>
+                        <button class="updbut-area updbut" value="Submit">Редактировать</button>
+                    </form>
+
+                    <div id="back">
+                        <p><a id="back" href="/">Вернуться на главную</a></p>
+                    </div>
+                    
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>
